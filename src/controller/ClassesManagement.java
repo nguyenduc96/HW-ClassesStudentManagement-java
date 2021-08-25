@@ -2,12 +2,16 @@ package controller;
 
 import model.Classes;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClassesManagement implements IGeneralManagement<Classes> {
     public static List<Classes> classesList = new ArrayList<>();
+
+    static {
+        classesList.add(new Classes("001", "C0621H1"));
+        classesList.add(new Classes("002", "C0621G1"));
+    }
 
     @Override
     public void addNew(Classes classes) {
