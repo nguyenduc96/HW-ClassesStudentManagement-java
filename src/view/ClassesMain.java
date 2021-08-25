@@ -149,8 +149,7 @@ public class ClassesMain {
     }
 
     public void menu() {
-        System.out.println("-------------------------------------------");
-        System.out.println("QUẢN LÝ LỚP HỌC");
+        System.out.println("--------------QUẢN LÝ LỚP HỌC--------------");
         System.out.println("1. Hiển thị danh sách các lớp học");
         System.out.println("2. Hiển thị danh sách học viên của một lớp học");
         System.out.println("3. Thêm lớp học");

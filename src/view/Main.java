@@ -4,28 +4,29 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         ClassesMain classesMain = new ClassesMain();
         StudentMain studentMain = new StudentMain();
-        String choice = "";
+        String choiceInputString = "";
         int choiceNumber = -1;
         do {
             menu();
             do {
                 try {
                     System.out.print("Mời bạn chọn : ");
-                    choice = scanner.nextLine();
-                    choiceNumber = Integer.parseInt(choice);
+                    choiceInputString = scanner.nextLine();
+                    choiceNumber = Integer.parseInt(choiceInputString);
                 } catch (NumberFormatException e) {
                     System.err.println("Bạn phải nhập vào số");
                 }
-            } while (choice.equals(""));
+            } while (choiceInputString.equals(""));
             switch (choiceNumber) {
                 case 1: {
                     studentMain.runStudentMain();
                     break;
                 }
-                case 2:{
+                case 2: {
                     classesMain.runClassesMain();
                     break;
                 }
@@ -38,8 +39,7 @@ public class Main {
     }
 
     private static void menu() {
-        System.out.println("-------------------------------------------");
-        System.out.println("MAIN MENU");
+        System.out.println("----------------MAIN MENU-----------------");
         System.out.println("1. QUẢN LÝ SINH VIÊN");
         System.out.println("2. QUẢN LÝ LỚP HỌC");
         System.out.println("0. THOÁT");

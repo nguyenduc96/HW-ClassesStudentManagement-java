@@ -65,11 +65,11 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", point=" + point +
-                ", classId='" + classId + '\'' +
+                "Mã sinh viên : '" + id + '\'' +
+                ", Họ và tên : '" + name + '\'' +
+                ", Ngày sinh : '" + dateOfBirth + '\'' +
+                ", Điểm : '" + point + '\'' +
+                ", Mã lớp học : '" + classId + '\'' +
                 '}';
     }
 }

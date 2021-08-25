@@ -1,6 +1,5 @@
 package controller;
 
-import model.Classes;
 import model.Student;
 
 import java.util.ArrayList;
@@ -10,14 +9,14 @@ public class StudentManagement implements IGeneralManagement<Student> {
     public static List<Student> students = new ArrayList<>();
 
     static {
-        students.add(new Student("m1", "duc", "30/09/1996", 1, "001"));
-        students.add(new Student("m2", "anh", "30/09/1996", 4,"001"));
-        students.add(new Student("m3", "thanh", "30/09/1996", 5, "002"));
-        students.add(new Student("m4", "hanh", "30/09/1996", 6, "002"));
-        students.add(new Student("m5", "manh", "30/09/1996", 8, "001"));
-        students.add(new Student("m6", "manh", "30/09/1996", 9, "001"));
-        students.add(new Student("m7", "manh", "30/09/1996", 7, "001"));
-        students.add(new Student("m8", "manh", "30/09/1996", 2, "001"));
+        students.add(new Student("m1", "Duc Nguyen Huynh", "30/09/1996", 1, "001"));
+        students.add(new Student("m2", "Anh Nguyen Tuan", "11/08/1995", 4, "001"));
+        students.add(new Student("m3", "Thanh Trieu Van", "21/12/1996", 5, "002"));
+        students.add(new Student("m4", "Dung Nguyen Kim", "19/11/1998", 6, "002"));
+        students.add(new Student("m5", "Manh Khong Van", "25/07/2000", 8, "001"));
+        students.add(new Student("m6", "Hieu Nguyen Cong", "14/05/1999", 9, "002"));
+        students.add(new Student("m7", "Cuong Chu Cong", "09/02/1997", 7, "001"));
+        students.add(new Student("m8", "Van Nguyen Khanh", "02/09/1998", 2, "001"));
     }
 
     @Override

@@ -16,7 +16,7 @@ public class StudentMain {
         String choice = "";
         int choiceNumber = -1;
         do {
-            studentMenu();
+            menu();
             do {
                 try {
                     System.out.print("Mời bạn chọn : ");
@@ -49,50 +49,63 @@ public class StudentMain {
                     break;
                 }
                 case 6: {
-                    String inputChoice = "";
-                    int choiceSubMenu = -1;
-                    do {
-                        subMenu();
-                        do {
-                            try {
-                                System.out.println("Mời chọn : ");
-                                inputChoice = scanner.nextLine();
-                                choiceSubMenu = Integer.parseInt(inputChoice);
-                            } catch (NumberFormatException e) {
-                                System.err.println("Bạn phải nhập vào số");
-                            }
-                        } while (inputChoice.equals(""));
-                        switch (choiceSubMenu) {
-                            case 1: {
-                                insertionSortAtoZ();
-                                break;
-                            }
-                            case 2: {
-                                insertionSortZtoA();
-                                break;
-                            }
-                        }
-                        break;
-                    } while (choiceSubMenu != 0);
+                    sortList();
                     break;
                 }
                 case 7: {
-                    System.out.println("TOP 5 sinh viên điểm cao nhất");
-                    studentManagement.sortPoint();
-                    for (int i = 0; i < 5; i++) {
-                        System.out.println(studentManagement.students.get(i).toString());
-                    }
+                    displayTopPoint();
                     break;
                 }
                 case 0: {
                     break;
                 }
                 default: {
-                    System.out.println("SỐ NHẬP KHÔNG TRONG MENU. MỜI NHẬP LẠI");
+                    System.err.println("SỐ NHẬP KHÔNG TRONG MENU. MỜI NHẬP LẠI");
                     break;
                 }
             }
         } while (choiceNumber != 0);
+    }
+
+    private void displayTopPoint() {
+        System.out.println("TOP 5 sinh viên điểm cao nhất");
+        studentManagement.sortPoint();
+        for (int i = 0; i < 5; i++) {
+            System.out.println(studentManagement.students.get(i).toString());
+        }
+    }
+
+    private void sortList() {
+        String inputChoice = "";
+        int choiceSubMenu = -1;
+        do {
+            subMenu();
+            do {
+                try {
+                    System.out.println("Mời chọn : ");
+                    inputChoice = scanner.nextLine();
+                    choiceSubMenu = Integer.parseInt(inputChoice);
+                } catch (NumberFormatException e) {
+                    System.err.println("Bạn phải nhập vào số");
+                }
+            } while (inputChoice.equals(""));
+            switch (choiceSubMenu) {
+                case 1: {
+                    insertionSortAtoZ();
+                    choiceSubMenu = 0;
+                    break;
+                }
+                case 2: {
+                    insertionSortZtoA();
+                    choiceSubMenu = 0;
+                    break;
+                }
+                default: {
+                    System.out.println("SỐ BẠN NHẬP KHÔNG CO TRONG MENU MỜI NHẬP LẠI");
+                    break;
+                }
+            }
+        } while (choiceSubMenu != 0);
     }
 
     private void findStudentInfo() {
@@ -100,7 +113,7 @@ public class StudentMain {
         String id = scanner.nextLine();
         int index = studentManagement.findIndex(id);
         if (index != -1) {
-            studentManagement.students.get(index).toString();
+            System.out.println(studentManagement.students.get(index).toString());
         } else {
             System.err.println("Không tìm thấy sinh viên có mã sinh viên : " + id);
         }
@@ -130,9 +143,11 @@ public class StudentMain {
     }
 
     private void subMenu() {
+        System.out.println("--------SẮP XẾP DANH SÁCH HỌC VIÊN--------");
         System.out.println("1. Sắp sếp từ A -> Z");
         System.out.println("2. Sắp sếp từ Z -> A");
         System.out.println("0. Quay lại");
+        System.out.println("-------------------------------------------");
     }
 
     private Student initStudent() {
@@ -184,20 +199,6 @@ public class StudentMain {
         return id;
     }
 
-    private void studentMenu() {
-        System.out.println("-------------------------------------------");
-        System.out.println("QUẢN LÝ THÔNG TIN SINH VIÊN");
-        System.out.println("1. Hiển thị toàn bộ thông tin sinh viên");
-        System.out.println("2. Tìm kiếm thông tin sinh viên");
-        System.out.println("3. Thêm thông tin sinh viên");
-        System.out.println("4. Cập nhật thông tin sinh viên");
-        System.out.println("5. Xóa thông tin sinh viên");
-        System.out.println("6. Sắp xếp danh sách");
-        System.out.println("7. Hiển thị TOP 5 sinh viên điểm cao");
-        System.out.println("0. Quay lại");
-        System.out.println("-------------------------------------------");
-    }
-
     private void insertionSortZtoA() {
         Student student;
         int pos;
@@ -228,5 +229,18 @@ public class StudentMain {
             studentList.set(pos, student);
         }
         System.out.println("ĐÃ SẮP XẾP");
+    }
+
+    private void menu() {
+        System.out.println("--------QUẢN LÝ THÔNG TIN SINH VIÊN--------");
+        System.out.println("1. Hiển thị toàn bộ thông tin sinh viên");
+        System.out.println("2. Tìm kiếm thông tin sinh viên");
+        System.out.println("3. Thêm thông tin sinh viên");
+        System.out.println("4. Cập nhật thông tin sinh viên");
+        System.out.println("5. Xóa thông tin sinh viên");
+        System.out.println("6. Sắp xếp danh sách");
+        System.out.println("7. Hiển thị TOP 5 sinh viên điểm cao");
+        System.out.println("0. Quay lại");
+        System.out.println("-------------------------------------------");
     }
 }
