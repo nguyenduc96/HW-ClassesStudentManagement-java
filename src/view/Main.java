@@ -30,6 +30,10 @@ public class Main {
                     classesMain.runClassesMain();
                     break;
                 }
+                case 0 : {
+                    System.exit(0);
+                    break;
+                }
                 default: {
                     System.out.println("SỐ NHẬP KHÔNG TRONG MENU. MỜI NHẬP LẠI");
                     break;

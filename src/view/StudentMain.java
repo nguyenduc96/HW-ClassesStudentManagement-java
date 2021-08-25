@@ -71,7 +71,10 @@ public class StudentMain {
         System.out.println("TOP 5 sinh viên điểm cao nhất");
         studentManagement.sortPoint();
         for (int i = 0; i < 5; i++) {
-            System.out.println(studentManagement.students.get(i).toString());
+            Student student = studentManagement.students.get(i);
+            System.out.println("Mã sinh viên : " + student.getId() + ", Họ và tên : " + student.getName() +
+                    ", Ngày sinh : " + student.getDateOfBirth() + ", Điểm : " + student.getPoint() +
+                    ", Mã lớp : " + student.getClassId());
         }
     }
 

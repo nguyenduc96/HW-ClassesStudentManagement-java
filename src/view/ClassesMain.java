@@ -54,7 +54,7 @@ public class ClassesMain {
                 case 0: {
                     break;
                 }
-                default:{
+                default: {
                     System.out.println("SỐ NHẬP KHÔNG TRONG MENU. MỜI NHẬP LẠI");
                     break;
                 }
@@ -70,7 +70,7 @@ public class ClassesMain {
         if (index != -1) {
             for (Student student : StudentManagement.students) {
                 if (student.getClassId().equals(id)) {
-                   count++;
+                    count++;
                 }
             }
             System.out.println("Số lượng sinh viên của lớp học có mã " + id + " là : " + count);

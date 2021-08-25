@@ -31,9 +31,6 @@ public class Classes {
 
     @Override
     public String toString() {
-        return "Classes{" +
-                "Mã lớp học : '" + id + '\'' +
-                ", Tên lớp : '" + name + '\'' +
-                '}';
+        return id + "," + name;
     }
 }

@@ -64,12 +64,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "Mã sinh viên : '" + id + '\'' +
-                ", Họ và tên : '" + name + '\'' +
-                ", Ngày sinh : '" + dateOfBirth + '\'' +
-                ", Điểm : '" + point + '\'' +
-                ", Mã lớp học : '" + classId + '\'' +
-                '}';
+        return id + "," + name + "," + dateOfBirth + "," + point + "," +classId;
     }
 }

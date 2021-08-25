@@ -32,7 +32,9 @@ public class StudentManagement implements IGeneralManagement<Student> {
     @Override
     public void displayAll() {
         for (Student student : students) {
-            System.out.println(student);
+            System.out.println("Mã sinh viên : " + student.getId() + ", Họ và tên : " + student.getName() +
+                    ", Ngày sinh : " + student.getDateOfBirth() + ", Điểm : " + student.getPoint() +
+                    ", Mã lớp : " + student.getClassId());
         }
     }
 
