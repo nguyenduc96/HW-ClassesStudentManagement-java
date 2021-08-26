@@ -1,16 +1,18 @@
 package view;
 
 import controller.ClassesManagement;
-import controller.StudentManagement;
 import exception.UniqueIdException;
 import model.Classes;
 import model.Student;
 
+import java.util.List;
 import java.util.Scanner;
+
+import static view.StudentMain.studentManagement;
 
 public class ClassesMain {
     public Scanner scanner = new Scanner(System.in);
-    public ClassesManagement classesManagement = new ClassesManagement();
+    public static ClassesManagement classesManagement = new ClassesManagement();
 
     public void runClassesMain() {
         String choice = "";
@@ -19,7 +21,7 @@ public class ClassesMain {
             menu();
             do {
                 try {
-                    System.out.print("Mời bạn chọn : ");
+                    System.out.println("Mời bạn chọn : ");
                     choice = scanner.nextLine();
                     choiceNumber = Integer.parseInt(choice);
                 } catch (NumberFormatException e) {
@@ -51,6 +53,18 @@ public class ClassesMain {
                     showAmountStudentInClass();
                     break;
                 }
+                case 7: {
+                    addStudentToClasses();
+                    break;
+                }
+                case 8: {
+                    saveInfo();
+                    break;
+                }
+                case 9: {
+                    openFileInfo();
+                    break;
+                }
                 case 0: {
                     break;
                 }
@@ -62,15 +76,50 @@ public class ClassesMain {
         } while (choiceNumber != 0);
     }
 
+    private void openFileInfo() {
+        classesManagement.readFile("classinfo.txt");
+        classesManagement.displayAll();
+    }
+
+    private void saveInfo() {
+        classesManagement.writeFile("classinfo.txt");
+        System.out.println("LƯU THÀNH CÔNG");
+    }
+
+    private void addStudentToClasses() {
+        System.out.println("Nhập mã sinh viên muốn thêm vào lớp : ");
+        String id = scanner.nextLine();
+        int index = studentManagement.findIndex(id);
+        List<Student> students = studentManagement.students;
+        if (index == -1) {
+            System.out.println("Mã sinh viên " + id + " không tồn tại");
+        } else {
+            System.out.println("Nhập mã lớp muốn thêm vào : ");
+            String classId = scanner.nextLine();
+            int indexClass = classesManagement.findIndex(classId);
+            if (indexClass == -1) {
+                System.out.println("Không có mã lớp " + classId);
+            } else {
+                List<Classes> classesList = classesManagement.classesList;
+                students.get(index).setClasses(classesList.get(indexClass));
+                System.out.println("THÊM THÀNH CÔNG");
+                System.out.println(students.get(index));
+            }
+        }
+    }
+
     private void showAmountStudentInClass() {
         System.out.println("Nhập mã lớp học muốn hiển thị : ");
         String id = scanner.nextLine();
         int index = classesManagement.findIndex(id);
         int count = 0;
         if (index != -1) {
-            for (Student student : StudentManagement.students) {
-                if (student.getClassId().equals(id)) {
-                    count++;
+            for (Student student : studentManagement.students) {
+                if (student.getClasses() != null) {
+                    boolean equals = student.getClasses().getId().equals(id);
+                    if (equals) {
+                        count++;
+                    }
                 }
             }
             System.out.println("Số lượng sinh viên của lớp học có mã " + id + " là : " + count);
@@ -84,9 +133,14 @@ public class ClassesMain {
         String id = scanner.nextLine();
         int index = classesManagement.findIndex(id);
         if (index != -1) {
-            for (Student student : StudentManagement.students) {
-                if (student.getClassId().equals(id)) {
-                    System.out.println(student);
+            System.out.println("HỌC VIÊN TRONG LỚP " + classesManagement.classesList.get(index).getName());
+            for (Student student : studentManagement.students) {
+                if (student.getClasses() != null) {
+                    if (student.getClasses().getId().equals(id)) {
+                        System.out.println("Mã sinh viên : " + student.getId() + ", Họ và tên : " + student.getName() +
+                                ", Ngày sinh : " + student.getDateOfBirth() + ", Điểm : " + student.getPoint() +
+                                ", Mã lớp : " + student.getClasses().getId() + ", Lớp : " + student.getClasses().getName());
+                    }
                 }
             }
         } else {
@@ -156,6 +210,9 @@ public class ClassesMain {
         System.out.println("4. Cập nhật thông tin lớp học");
         System.out.println("5. Xóa lớp học");
         System.out.println("6. Thống kê số lượng sinh viên của một lớp");
+        System.out.println("7. Thêm sinh viên vào lớp");
+        System.out.println("8. Ghi file");
+        System.out.println("9. Đọc file");
         System.out.println("0. Quay lại");
         System.out.println("-------------------------------------------");
     }

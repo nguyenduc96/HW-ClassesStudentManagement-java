@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class StudentMain {
     private Scanner scanner = new Scanner(System.in);
-    public StudentManagement studentManagement = new StudentManagement();
+    public static StudentManagement studentManagement = new StudentManagement();
 
     public void runStudentMain() {
         String choice = "";
@@ -19,7 +19,7 @@ public class StudentMain {
             menu();
             do {
                 try {
-                    System.out.print("Mời bạn chọn : ");
+                    System.out.println("Mời bạn chọn : ");
                     choice = scanner.nextLine();
                     choiceNumber = Integer.parseInt(choice);
                 } catch (NumberFormatException e) {
@@ -56,6 +56,16 @@ public class StudentMain {
                     displayTopPoint();
                     break;
                 }
+                case 8: {
+                    studentManagement.writeFile("studentinfo.txt");
+                    System.out.println("OK");
+                    break;
+                }
+                case 9: {
+                    studentManagement.readFile("studentinfo.txt");
+                    System.out.println("OK");
+                    break;
+                }
                 case 0: {
                     break;
                 }
@@ -72,11 +82,10 @@ public class StudentMain {
         studentManagement.sortPoint();
         for (int i = 0; i < 5; i++) {
             Student student = studentManagement.students.get(i);
-            System.out.println("Mã sinh viên : " + student.getId() + ", Họ và tên : " + student.getName() +
-                    ", Ngày sinh : " + student.getDateOfBirth() + ", Điểm : " + student.getPoint() +
-                    ", Mã lớp : " + student.getClassId());
+            studentManagement.checkDisplay(student);
         }
     }
+
 
     private void sortList() {
         String inputChoice = "";
@@ -179,9 +188,7 @@ public class StudentMain {
                 System.err.println("Điểm nhập vào phải từ 0 đến 10. Hãy nhập lại");
             }
         } while (pointInput.equals(""));
-        System.out.println("Nhập mã lớp học : ");
-        String classId = scanner.nextLine();
-        return new Student(id, name, dateOfBirth, point, classId);
+        return new Student(id, name, dateOfBirth, point);
     }
 
     private double inputPoint(String pointInput) throws NumberPointException {
@@ -243,6 +250,8 @@ public class StudentMain {
         System.out.println("5. Xóa thông tin sinh viên");
         System.out.println("6. Sắp xếp danh sách");
         System.out.println("7. Hiển thị TOP 5 sinh viên điểm cao");
+        System.out.println("8. Ghi file");
+        System.out.println("9. Đọc file");
         System.out.println("0. Quay lại");
         System.out.println("-------------------------------------------");
     }

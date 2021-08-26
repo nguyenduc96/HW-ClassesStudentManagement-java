@@ -1,0 +1,8 @@
+m1,Duc Nguyen Huynh,30/09/1996,1.0,001,C0621H1
+m2,Anh Nguyen Tuan,11/08/1995,4.0,null
+m3,Thanh Trieu Van,21/12/1996,5.0,null
+m4,Dung Nguyen Kim,19/11/1998,6.0,null
+m5,Manh Khong Van,25/07/2000,8.0,null
+m6,Hieu Nguyen Cong,14/05/1999,9.0,null
+m7,Cuong Chu Cong,09/02/1997,7.0,null
+m8,Van Nguyen Khanh,02/09/1998,2.0,null

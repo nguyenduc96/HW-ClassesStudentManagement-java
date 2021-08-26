@@ -10,4 +10,8 @@ public interface IGeneralManagement<T> {
     void update(int index, T t);
 
     int findIndex(String id);
+
+    void readFile(String path);
+
+    void writeFile(String path);
 }

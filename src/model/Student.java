@@ -9,17 +9,16 @@ public class Student {
 
     private double point;
 
-    private String classId;
+    private Classes classes;
 
     public Student() {
     }
 
-    public Student(String id, String name, String dateOfBirth, double point, String classId) {
+    public Student(String id, String name, String dateOfBirth, double point) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.point = point;
-        this.classId = classId;
     }
 
     public String getId() {
@@ -54,16 +53,16 @@ public class Student {
         this.point = point;
     }
 
-    public String getClassId() {
-        return classId;
+    public Classes getClasses() {
+        return classes;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
+    public void setClasses(Classes classes) {
+        this.classes = classes;
     }
 
     @Override
     public String toString() {
-        return id + "," + name + "," + dateOfBirth + "," + point + "," +classId;
+        return id + "," + name + "," + dateOfBirth + "," + point + "," +classes;
     }
 }

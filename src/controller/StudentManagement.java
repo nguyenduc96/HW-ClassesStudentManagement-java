@@ -1,23 +1,14 @@
 package controller;
 
+import model.Classes;
 import model.Student;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentManagement implements IGeneralManagement<Student> {
     public static List<Student> students = new ArrayList<>();
-
-    static {
-        students.add(new Student("m1", "Duc Nguyen Huynh", "30/09/1996", 1, "001"));
-        students.add(new Student("m2", "Anh Nguyen Tuan", "11/08/1995", 4, "001"));
-        students.add(new Student("m3", "Thanh Trieu Van", "21/12/1996", 5, "002"));
-        students.add(new Student("m4", "Dung Nguyen Kim", "19/11/1998", 6, "002"));
-        students.add(new Student("m5", "Manh Khong Van", "25/07/2000", 8, "001"));
-        students.add(new Student("m6", "Hieu Nguyen Cong", "14/05/1999", 9, "002"));
-        students.add(new Student("m7", "Cuong Chu Cong", "09/02/1997", 7, "001"));
-        students.add(new Student("m8", "Van Nguyen Khanh", "02/09/1998", 2, "001"));
-    }
 
     @Override
     public void addNew(Student student) {
@@ -32,9 +23,18 @@ public class StudentManagement implements IGeneralManagement<Student> {
     @Override
     public void displayAll() {
         for (Student student : students) {
+            checkDisplay(student);
+        }
+    }
+
+    public void checkDisplay(Student student) {
+        if (student.getClasses() != null) {
             System.out.println("Mã sinh viên : " + student.getId() + ", Họ và tên : " + student.getName() +
                     ", Ngày sinh : " + student.getDateOfBirth() + ", Điểm : " + student.getPoint() +
-                    ", Mã lớp : " + student.getClassId());
+                    ", Mã lớp : " + student.getClasses().getId() + ", Lớp : " + student.getClasses().getName());
+        } else {
+            System.out.println("Mã sinh viên : " + student.getId() + ", Họ và tên : " + student.getName() +
+                    ", Ngày sinh : " + student.getDateOfBirth() + ", Điểm : " + student.getPoint());
         }
     }
 
@@ -53,6 +53,47 @@ public class StudentManagement implements IGeneralManagement<Student> {
             }
         }
         return index;
+    }
+
+    @Override
+    public void readFile(String path) {
+        try {
+            students.clear();
+            FileReader fileReader = new FileReader(path);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] strings = line.split(",");
+                String id = strings[0];
+                String name = strings[1];
+                String dateOfBirth = strings[2];
+                double point = Double.parseDouble(strings[3]);
+                Student student = new Student(id, name, dateOfBirth, point);
+                students.add(student);
+                if (!strings[4].equals("null")) {
+                    student.setClasses(new Classes(strings[4], strings[5]));
+                }
+            }
+            bufferedReader.close();
+            fileReader.close();
+        } catch (IOException e) {
+            System.err.println("Đường dẫn không đúng hoặc file không tồn tại.");
+        }
+    }
+
+    @Override
+    public void writeFile(String path) {
+        try {
+            FileWriter fileWriter = new FileWriter(path);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Student student : students) {
+                bufferedWriter.write(student.toString() + "\n");
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.err.println("Đường dẫn không đúng hoặc file không tồn tại.");
+        }
     }
 
     public void sortPoint() {

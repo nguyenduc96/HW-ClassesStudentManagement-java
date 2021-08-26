@@ -14,7 +14,7 @@ public class Main {
             menu();
             do {
                 try {
-                    System.out.print("Mời bạn chọn : ");
+                    System.out.println("Mời bạn chọn : ");
                     choiceInputString = scanner.nextLine();
                     choiceNumber = Integer.parseInt(choiceInputString);
                 } catch (NumberFormatException e) {
